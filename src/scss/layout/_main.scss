@@ -1,0 +1,36 @@
+// Main content layout
+.main {
+  min-height: calc(100vh - 140px); // Adjust based on header/footer height
+  padding: 2rem 0;
+}
+
+// Framework list container
+.framework-list {
+  background-color: $sidebar-bg;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem;
+  height: fit-content;
+  box-shadow: $shadow;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: $dark;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+// Data table container
+.data-table-container {
+  background-color: $content-bg;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem;
+  box-shadow: $shadow;
+  min-height: 400px;
+}

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework Management System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="header__content">
+                <div class="header__title-section">
+                    <div class="header__icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="header__title-info">
+                        <h1 class="header__title">Compliance Frameworks</h1>
+                        <nav class="breadcrumb">
+                            <span class="breadcrumb__item">Admin</span>
+                            <span class="breadcrumb__separator">></span>
+                            <span class="breadcrumb__item breadcrumb__item--active">Compliance Frameworks</span>
+                        </nav>
+                    </div>
+                </div>
+                <div class="header__actions">
+                    <button type="button" class="btn btn-success me-2">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newFrameworkModal">
+                        + New Custom Framework
+                        <span class="badge bg-light text-dark ms-1">1/2</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Left Sidebar - Framework List -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="sidebar">
+                        <div class="sidebar__content">
+                            <div class="framework-list">
+                                <div class="framework-list__section">
+                                    <h6 class="framework-list__section-title">Custom Frameworks</h6>
+                                    <div class="framework-list__container" id="customFrameworkList">
+                                        <!-- Custom framework cards will be loaded here -->
+                                    </div>
+                                </div>
+                                <div class="framework-list__section">
+                                    <h6 class="framework-list__section-title">System Frameworks</h6>
+                                    <div class="framework-list__container" id="systemFrameworkList">
+                                        <!-- System framework cards will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Data Table -->
+                <div class="col-md-8 col-lg-9">
+                    <div class="data-table-container">
+                        <!-- Empty State (Default) -->
+                        <div class="data-table__placeholder" id="dataTablePlaceholder">
+                            <div class="placeholder">
+                                <div class="placeholder__icon">
+                                    <img src="assets/icons/Vector.svg" alt="Empty State" class="empty-state-icon">
+                                </div>
+                                <h3 class="placeholder__title">Please select framework from list in left side.</h3>
+                                <p class="placeholder__text">or click here to add new framework.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Table (Hidden by default) -->
+                        <div class="data-table" id="dataTable" style="display: none;">
+                            <div class="data-table__header">
+                                <div class="data-table__search">
+                                    <input type="text" class="form-control" placeholder="Search" id="searchInput">
+                                </div>
+                            </div>
+                            <div class="data-table__content">
+                                <table class="table table-striped" id="controlsTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="sortable" data-sort="id">
+                                                Control ID
+                                                <span class="sort-indicator">↕</span>
+                                            </th>
+                                            <th class="sortable" data-sort="category">
+                                                Control Category
+                                                <span class="sort-indicator">↕</span>
+                                            </th>
+                                            <th class="sortable" data-sort="description">
+                                                Control Description
+                                                <span class="sort-indicator">↕</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="controlsTableBody">
+                                        <!-- Controls will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="data-table__pagination">
+                                <div class="pagination-left">
+                                    <span>Show</span>
+                                    <select class="form-select form-select-sm d-inline-block w-auto mx-1" id="entriesPerPage">
+                                        <option value="10" selected>10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <span>entries</span>
+                                </div>
+                                <div class="pagination-center">
+                                    <span class="pagination-info">Showing 1 to 10 of 53 entries</span>
+                                </div>
+                                <div class="pagination-right">
+                                    <nav class="pagination-nav">
+                                        <button class="btn btn-sm btn-outline-secondary" id="prevBtn" disabled>Previous</button>
+                                        <button class="btn btn-sm btn-primary" data-page="1">1</button>
+                                        <button class="btn btn-sm btn-outline-secondary" data-page="2">2</button>
+                                        <button class="btn btn-sm btn-outline-secondary" data-page="3">3</button>
+                                        <button class="btn btn-sm btn-outline-secondary" data-page="4">4</button>
+                                        <span class="pagination-ellipsis">...</span>
+                                        <button class="btn btn-sm btn-outline-secondary" data-page="24">24</button>
+                                        <button class="btn btn-sm btn-outline-secondary" id="nextBtn">Next</button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Framework Modal -->
+    <div class="modal fade" id="newFrameworkModal" tabindex="-1" aria-labelledby="newFrameworkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title-section">
+                        <h5 class="modal-title" id="newFrameworkModalLabel">Add New Framework 1/2</h5>
+                        <p class="modal-subtitle">Please fill in the details of the new framework.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- License Banner -->
+                    <div class="license-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <span>You can 1 Enterprise Framework license available.</span>
+                    </div>
+
+                    <!-- Stepper Progress -->
+                    <div class="stepper-progress">
+                        <div class="stepper-step stepper-step--active" data-step="1">
+                            <div class="stepper-step__number">01</div>
+                            <div class="stepper-step__label">Framework Details</div>
+                        </div>
+                        <div class="stepper-step" data-step="2">
+                            <div class="stepper-step__number">02</div>
+                            <div class="stepper-step__label">Control Items</div>
+                        </div>
+                    </div>
+
+                    <!-- Stepper Content -->
+                    <div class="stepper" id="frameworkStepper">
+                        <!-- Step 1: Framework Details -->
+                        <div class="stepper__step stepper__step--active" data-step="1">
+                            <form id="frameworkForm" class="stepper__form">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="frameworkName" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="frameworkName" name="name" placeholder="Enter name" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="frameworkShortName" class="form-label">Short Name</label>
+                                        <input type="text" class="form-control" id="frameworkShortName" name="shortName" placeholder="Enter short name" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="uploadLogo">
+                                        <label class="form-check-label" for="uploadLogo">
+                                            Upload Framework Logo
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="frameworkDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="frameworkDescription" name="description" rows="3" placeholder="Please add description" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="templateFile" class="form-label">Upload Template</label>
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="document.getElementById('templateFile').click()">
+                                            Select File
+                                        </button>
+                                        <span class="ms-2" id="fileName">No file selected</span>
+                                    </div>
+                                    <input type="file" class="form-control" id="templateFile" name="template" accept=".xlsx,.xls,.csv" style="display: none;">
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Step 2: Control Items -->
+                        <div class="stepper__step" data-step="2">
+                            <div class="controls-crud">
+                                <div class="controls-crud__header">
+                                    <h6>Control Items</h6>
+                                </div>
+                                <div class="controls-crud__table">
+                                    <table class="table table-sm" id="controlsCrudTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Control ID</th>
+                                                <th>Control Category</th>
+                                                <th>Control Description</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="controlsCrudTableBody">
+                                            <tr>
+                                                <td>Article I-0 -1.1</td>
+                                                <td>Article I, Business Contact Information</td>
+                                                <td>Company and Supplier may Process the other's BCI wherever they do business in connection with Supplier's delivery of Services and Deliverables.</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Article I-0 -1.2</td>
+                                                <td>Article I, Business Contact Information</td>
+                                                <td>A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party.</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Article I-0 -1.2</td>
+                                                <td>Article I, Business Contact Information</td>
+                                                <td>The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship.</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Article I-0 -1.3</td>
+                                                <td>Article I, Business Contact Information</td>
+                                                <td>This Article applies if Supplier Processes Company Data, other than Company's BCI. Supplier will comply with the requirements of this Article in providing all Services and Deliverables, and by doing so protect Company Data against loss, destruction, alteration, accidental or unauthorized disclosure, accidental or unauthorized access, and unlawful forms of Processing. The requirements of this Article extend to all IT applications, platforms, and infrastructure that Supplier operates or manages in providing Deliverables and Services, including all development, testing, hosting, support, operations, and data center environments.</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Article II-0</td>
+                                                <td>Article II, Technical and Organizational Measures</td>
+                                                <td>The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship.</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-stepper-prev style="display: none;">Previous Step</button>
+                    <button type="button" class="btn btn-success" data-stepper-next>Next > Control Items</button>
+                    <button type="button" class="btn btn-success" data-stepper-complete style="display: none;">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/Stepper.js"></script>
+    <script src="js/FrameworkList.js"></script>
+    <script src="js/DataTable.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "Article I-0 -1.1",
+    "category": "Article I, Business Contact Information",
+    "description": "Company and Supplier may Process the other's BCI wherever they do business in connection with Supplier's delivery of Services and Deliverables."
+  },
+  {
+    "id": "Article I-0 -1.2",
+    "category": "Article I, Business Contact Information", 
+    "description": "A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party."
+  },
+  {
+    "id": "Article I-0 -1.2",
+    "category": "Article I, Business Contact Information",
+    "description": "The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship."
+  },
+  {
+    "id": "Article I-0 -1.3",
+    "category": "Article I, Business Contact Information",
+    "description": "This Article applies if Supplier Processes Company Data, other than Company's BCI. Supplier will comply with the requirements of this Article in providing all Services and Deliverables, and by doing so protect Company Data against loss, destruction, alteration, accidental or unauthorized disclosure, accidental or unauthorized access, and unlawful forms of Processing. The requirements of this Article extend to all IT applications, platforms, and infrastructure that Supplier operates or manages in providing Deliverables and Services, including all development, testing, hosting, support, operations, and data center environments."
+  },
+  {
+    "id": "Article II-0",
+    "category": "Article II, Technical and Organizational Measures",
+    "description": "The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship."
+  },
+  {
+    "id": "Article I-0 -1.3",
+    "category": "Article I, Business Contact Information",
+    "description": "The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship."
+  },
+  {
+    "id": "Article I-0 -1.2",
+    "category": "Article I, Business Contact Information",
+    "description": "A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party."
+  },
+  {
+    "id": "Article I-0 -1.2",
+    "category": "Article I, Business Contact Information",
+    "description": "A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party."
+  },
+  {
+    "id": "Article VIII-1-1.4",
+    "category": "Article VIII, Technical and Organizational Measures",
+    "description": "Supplier will review its IT security policies and practices at least annually and amend them as Supplier deems necessary to protect the Company Materials."
+  }
+]

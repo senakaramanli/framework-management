@@ -1,0 +1,96 @@
+{
+  "custom": [
+    {
+      "id": 1,
+      "name": "ECF 2023",
+      "description": "Example Custom Framework",
+      "version": "1.0",
+      "controlCount": 25,
+      "status": "ready",
+      "type": "custom",
+      "icon": "ecf"
+    },
+    {
+      "id": 2,
+      "name": "CSHRTN",
+      "description": "Custom Framework",
+      "version": "2.1",
+      "controlCount": 18,
+      "status": "mapping",
+      "type": "custom",
+      "icon": "cshrtn"
+    },
+    {
+      "id": 3,
+      "name": "DCF 2023",
+      "description": "Demo Custom Framework",
+      "version": "1.5",
+      "controlCount": 32,
+      "status": "publish",
+      "type": "custom",
+      "icon": "dcf"
+    },
+    {
+      "id": 4,
+      "name": "CF",
+      "description": "Cybersecurity Framework",
+      "version": "3.0",
+      "controlCount": 45,
+      "status": "failed",
+      "type": "custom",
+      "icon": "cf"
+    },
+    {
+      "id": 5,
+      "name": "ISCF",
+      "description": "Internet Security Custom Framework",
+      "version": "2.3",
+      "controlCount": 28,
+      "status": "published",
+      "type": "custom",
+      "icon": "iscf"
+    },
+    {
+      "id": 6,
+      "name": "CSHRTN 2",
+      "description": "Custom Framework",
+      "version": "1.2",
+      "controlCount": 15,
+      "status": "deactivated",
+      "type": "custom",
+      "icon": "cshrtn2"
+    }
+  ],
+  "system": [
+    {
+      "id": 7,
+      "name": "GDPR",
+      "description": "General Data Protection Regulation",
+      "version": "2023",
+      "controlCount": 53,
+      "status": "active",
+      "type": "system",
+      "icon": "gdpr"
+    },
+    {
+      "id": 8,
+      "name": "NIST CSF",
+      "description": "NIST Cybersecurity Framework",
+      "version": "1.1",
+      "controlCount": 108,
+      "status": "active",
+      "type": "system",
+      "icon": "nist"
+    },
+    {
+      "id": 9,
+      "name": "ISO27001",
+      "description": "Internet Security Management",
+      "version": "2022",
+      "controlCount": 114,
+      "status": "active",
+      "type": "system",
+      "icon": "iso"
+    }
+  ]
+}

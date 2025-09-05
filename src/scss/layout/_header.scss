@@ -1,0 +1,26 @@
+// Header styles
+.header {
+  background-color: $header-bg;
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 0;
+  box-shadow: $shadow;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $dark;
+    margin: 0;
+  }
+
+  &__new-btn {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius;
+    transition: $transition-base;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

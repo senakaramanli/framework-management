@@ -1,0 +1,27 @@
+[
+  {
+    "id": "ISO-001",
+    "category": "Information Security Policies",
+    "description": "Establish and maintain information security policies that provide management direction and support for information security."
+  },
+  {
+    "id": "ISO-002",
+    "category": "Organization of Information Security",
+    "description": "Establish a management framework to initiate and control the implementation and operation of information security within the organization."
+  },
+  {
+    "id": "ISO-003",
+    "category": "Human Resource Security",
+    "description": "Ensure that employees, contractors, and third-party users understand their responsibilities and are suitable for the roles for which they are considered."
+  },
+  {
+    "id": "ISO-004",
+    "category": "Asset Management",
+    "description": "Identify organizational assets and define appropriate protection responsibilities."
+  },
+  {
+    "id": "ISO-005",
+    "category": "Access Control",
+    "description": "Control access to information and information processing facilities based on business and security requirements."
+  }
+]

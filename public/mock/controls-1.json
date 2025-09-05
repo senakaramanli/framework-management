@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ECF-001",
+    "category": "Access Control",
+    "description": "Implement and maintain appropriate access controls to ensure only authorized personnel can access sensitive data and systems."
+  },
+  {
+    "id": "ECF-002",
+    "category": "Data Encryption",
+    "description": "Encrypt all sensitive data both in transit and at rest using industry-standard encryption algorithms."
+  },
+  {
+    "id": "ECF-003",
+    "category": "Audit Logging",
+    "description": "Maintain comprehensive audit logs of all system access and data modifications for security monitoring and compliance."
+  }
+]

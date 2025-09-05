@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CSHRTN-001",
+    "category": "Risk Assessment",
+    "description": "Conduct regular risk assessments to identify and evaluate potential security threats and vulnerabilities."
+  },
+  {
+    "id": "CSHRTN-002",
+    "category": "Incident Response",
+    "description": "Establish and maintain an incident response plan to effectively handle security incidents and data breaches."
+  }
+]

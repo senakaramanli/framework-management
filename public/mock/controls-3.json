@@ -1,0 +1,12 @@
+[
+  {
+    "id": "DCF-001",
+    "category": "Data Classification",
+    "description": "Classify data based on sensitivity levels and implement appropriate protection measures for each classification."
+  },
+  {
+    "id": "DCF-002",
+    "category": "Data Retention",
+    "description": "Establish and enforce data retention policies to ensure data is not kept longer than necessary."
+  }
+]

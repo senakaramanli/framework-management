@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ISCF-001",
+    "category": "Internet Security",
+    "description": "Implement comprehensive internet security measures including web filtering, email security, and secure browsing policies."
+  },
+  {
+    "id": "ISCF-002",
+    "category": "Malware Protection",
+    "description": "Deploy and maintain anti-malware solutions to protect against viruses, ransomware, and other malicious software."
+  }
+]
