@@ -1,168 +1,196 @@
 /**
- * Stepper - Generic reusable stepper component
+ * Generic Stepper Component
+ * State machine approach with data-* attributes
+ * NO show/hide functions - only CSS-based visibility
  */
 class Stepper {
-  constructor(container) {
-    this.container = container;
-    this.currentStep = 1;
-    this.totalSteps = this.getTotalSteps();
-    this.init();
-  }
-
-  init() {
-    console.log('Stepper initialized with', this.totalSteps, 'steps');
-    this.setupEventListeners();
-    this.updateProgress();
-  }
-
-  getTotalSteps() {
-    const steps = this.container.querySelectorAll('[data-step]');
-    return steps.length;
-  }
-
-  setupEventListeners() {
-    // Next button - use direct event listener
-    const nextBtn = document.querySelector('[data-stepper-next]');
-    if (nextBtn) {
-      console.log('Next button found:', nextBtn);
-      // Remove any existing listeners
-      nextBtn.removeEventListener('click', this.handleNextClick);
-      // Add new listener
-      this.handleNextClick = (e) => {
-        e.preventDefault();
-        console.log('Next button clicked!');
-        this.nextStep();
-      };
-      nextBtn.addEventListener('click', this.handleNextClick);
-    } else {
-      console.error('Next button not found!');
+    constructor(container, options = {}) {
+        this.container = container;
+        this.options = {
+            start: 1,
+            stepsSelector: '[data-step]',
+            onBeforeChange: null,
+            onChange: null,
+            ...options
+        };
+        
+        this.currentStep = this.options.start;
+        this.steps = this.container.querySelectorAll(this.options.stepsSelector);
+        this.guard = null;
+        
+        this.init();
     }
-
-    // Previous button
-    const prevBtn = document.querySelector('[data-stepper-prev]');
-    if (prevBtn) {
-      console.log('Previous button found:', prevBtn);
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Previous button clicked!');
-        this.prevStep();
-      });
-    }
-
-    // Complete button
-    const completeBtn = document.querySelector('[data-stepper-complete]');
-    if (completeBtn) {
-      console.log('Complete button found:', completeBtn);
-      completeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Complete button clicked!');
-        this.complete();
-      });
-    }
-  }
-
-  nextStep() {
-    console.log('nextStep called, currentStep:', this.currentStep, 'totalSteps:', this.totalSteps);
     
-    if (this.currentStep < this.totalSteps) {
-      this.currentStep++;
-      console.log('Moving to step:', this.currentStep);
-      this.updateProgress();
-      this.updateModalTitle();
-    } else {
-      console.log('Already at last step');
+    init() {
+        this.updateStepVisibility();
+        this.updateProgress();
+        this.bindEvents();
+        
+        if (this.options.onChange) {
+            this.options.onChange(this.currentStep);
+        }
     }
-  }
-
-  prevStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-      console.log('Moving to step:', this.currentStep);
-      this.updateProgress();
-      this.updateModalTitle();
+    
+    bindEvents() {
+        // Bind stepper navigation buttons
+        const prevBtn = this.container.querySelector('[data-stepper-prev]');
+        const nextBtn = this.container.querySelector('[data-stepper-next]');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => this.prev());
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => this.next());
+        }
+        
+        // Keyboard navigation
+        this.container.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                this.prev();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                this.next();
+            }
+        });
     }
-  }
-
-  complete() {
-    console.log('Stepper completed');
-    // Close modal
-    const modal = document.getElementById('newFrameworkModal');
-    if (modal) {
-      const modalInstance = bootstrap.Modal.getInstance(modal);
-      if (modalInstance) {
-        modalInstance.hide();
-      }
+    
+    getCurrent() {
+        return this.currentStep;
     }
-  }
-
-  updateProgress() {
-    console.log('updateProgress called, currentStep:', this.currentStep);
-
-    // Update step indicators
-    const stepIndicators = document.querySelectorAll('.stepper-step');
-    stepIndicators.forEach((indicator, index) => {
-      const stepNumber = index + 1;
-      if (stepNumber <= this.currentStep) {
-        indicator.classList.add('stepper-step--active');
-      } else {
-        indicator.classList.remove('stepper-step--active');
-      }
-    });
-
-    // Update step content
-    const steps = this.container.querySelectorAll('[data-step]');
-    steps.forEach((step, index) => {
-      const stepNumber = index + 1;
-      if (stepNumber === this.currentStep) {
-        step.classList.add('stepper__step--active');
-      } else {
-        step.classList.remove('stepper__step--active');
-      }
-    });
-
-    // Update buttons
-    this.updateButtons();
-  }
-
-  updateButtons() {
-    const prevBtn = document.querySelector('[data-stepper-prev]');
-    const nextBtn = document.querySelector('[data-stepper-next]');
-    const completeBtn = document.querySelector('[data-stepper-complete]');
-
-    console.log('updateButtons called, currentStep:', this.currentStep);
-
-    // Hide all buttons first
-    if (prevBtn) prevBtn.style.display = 'none';
-    if (nextBtn) nextBtn.style.display = 'none';
-    if (completeBtn) completeBtn.style.display = 'none';
-
-    // Show appropriate buttons based on current step
-    if (this.currentStep === 1) {
-      // First step: show next button
-      if (nextBtn) {
-        nextBtn.style.display = 'inline-block';
-        console.log('Step 1: Showing next button');
-      }
-    } else if (this.currentStep === this.totalSteps) {
-      // Last step: show previous and complete buttons
-      if (prevBtn) {
-        prevBtn.style.display = 'inline-block';
-        console.log('Last step: Showing previous button');
-      }
-      if (completeBtn) {
-        completeBtn.style.display = 'inline-block';
-        console.log('Last step: Showing complete button');
-      }
+    
+    goTo(stepNumber) {
+        if (stepNumber < 1 || stepNumber > this.steps.length) {
+            console.warn(`Step ${stepNumber} is out of range`);
+            return false;
+        }
+        
+        // Check guard function
+        if (this.guard && !this.guard(this.currentStep, stepNumber)) {
+            return false;
+        }
+        
+        // Check onBeforeChange callback
+        if (this.options.onBeforeChange && !this.options.onBeforeChange(this.currentStep, stepNumber)) {
+            return false;
+        }
+        
+        this.currentStep = stepNumber;
+        this.updateStepVisibility();
+        this.updateProgress();
+        
+        if (this.options.onChange) {
+            this.options.onChange(this.currentStep);
+        }
+        
+        return true;
     }
-  }
-
-  updateModalTitle() {
-    const title = document.querySelector('.modal-title');
-    if (title) {
-      title.textContent = `Add New Framework ${this.currentStep}/${this.totalSteps}`;
+    
+    next() {
+        return this.goTo(this.currentStep + 1);
     }
-  }
+    
+    prev() {
+        return this.goTo(this.currentStep - 1);
+    }
+    
+    setGuard(guardFunction) {
+        this.guard = guardFunction;
+    }
+    
+    updateStepVisibility() {
+        // Update container attribute for CSS-based visibility
+        this.container.dataset.currentStep = this.currentStep;
+        
+        // Update individual step attributes
+        this.steps.forEach((step, index) => {
+            const stepNumber = index + 1;
+            step.dataset.active = (stepNumber === this.currentStep).toString();
+        });
+    }
+    
+    updateProgress() {
+        const progressContainer = this.container.querySelector('.stepper-progress');
+        if (!progressContainer) return;
+        
+        const progressSteps = progressContainer.querySelectorAll('.stepper-step');
+        
+        progressSteps.forEach((step, index) => {
+            const stepNumber = index + 1;
+            step.classList.remove('stepper-step--active', 'stepper-step--completed');
+            
+            if (stepNumber === this.currentStep) {
+                step.classList.add('stepper-step--active');
+            } else if (stepNumber < this.currentStep) {
+                step.classList.add('stepper-step--completed');
+            }
+        });
+        
+        // Update modal title
+        const modalTitle = document.querySelector('#newFrameworkModalLabel');
+        if (modalTitle) {
+            modalTitle.textContent = `Add New Framework ${this.currentStep}/${this.steps.length}`;
+        }
+        
+        // Update header badge
+        const headerBadge = document.querySelector('#headerBadge');
+        if (headerBadge) {
+            headerBadge.textContent = `${this.currentStep}/${this.steps.length}`;
+        }
+        
+        // Update navigation buttons
+        this.updateNavigationButtons();
+    }
+    
+    updateNavigationButtons() {
+        const prevBtn = this.container.querySelector('[data-stepper-prev]');
+        const nextBtn = this.container.querySelector('[data-stepper-next]');
+        
+        if (prevBtn) {
+            if (this.currentStep === 1) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'inline-block';
+            }
+        }
+        
+        if (nextBtn) {
+            if (this.currentStep === this.steps.length) {
+                nextBtn.textContent = 'Finish';
+                nextBtn.classList.add('btn-success');
+                nextBtn.classList.remove('btn-primary');
+            } else {
+                nextBtn.textContent = `Next > Control Items`;
+                nextBtn.classList.add('btn-primary');
+                nextBtn.classList.remove('btn-success');
+            }
+        }
+    }
+    
+    destroy() {
+        // Remove event listeners
+        const prevBtn = this.container.querySelector('[data-stepper-prev]');
+        const nextBtn = this.container.querySelector('[data-stepper-next]');
+        
+        if (prevBtn) {
+            prevBtn.removeEventListener('click', this.prev);
+        }
+        
+        if (nextBtn) {
+            nextBtn.removeEventListener('click', this.next);
+        }
+        
+        this.container.removeEventListener('keydown', this.handleKeydown);
+    }
+}
+
+// Factory function for creating steppers
+function createStepper(container, options = {}) {
+    return new Stepper(container, options);
 }
 
 // Export for use in other modules
-window.Stepper = Stepper;
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { Stepper, createStepper };
+}

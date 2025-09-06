@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "ECF 2023",
-      "description": "Example Custom Framework",
+      "description": "Custom Framework",
       "version": "1.0",
       "controlCount": 25,
       "status": "ready",
@@ -23,17 +23,17 @@
     {
       "id": 3,
       "name": "DCF 2023",
-      "description": "Demo Custom Framework",
+      "description": "Custom Framework",
       "version": "1.5",
       "controlCount": 32,
-      "status": "publish",
+      "status": "ready",
       "type": "custom",
       "icon": "dcf"
     },
     {
       "id": 4,
       "name": "CF",
-      "description": "Cybersecurity Framework",
+      "description": "Custom Framework",
       "version": "3.0",
       "controlCount": 45,
       "status": "failed",
@@ -43,8 +43,8 @@
     {
       "id": 5,
       "name": "ISCF",
-      "description": "Internet Security Custom Framework",
-      "version": "2.3",
+      "description": "Custom Framework",
+      "version": "2.0",
       "controlCount": 28,
       "status": "published",
       "type": "custom",
@@ -54,7 +54,7 @@
       "id": 6,
       "name": "CSHRTN 2",
       "description": "Custom Framework",
-      "version": "1.2",
+      "version": "1.0",
       "controlCount": 15,
       "status": "deactivated",
       "type": "custom",
@@ -65,30 +65,30 @@
     {
       "id": 7,
       "name": "GDPR",
-      "description": "General Data Protection Regulation",
-      "version": "2023",
+      "description": "System Framework",
+      "version": "1.0",
       "controlCount": 53,
-      "status": "active",
+      "status": "published",
       "type": "system",
       "icon": "gdpr"
     },
     {
       "id": 8,
       "name": "NIST CSF",
-      "description": "NIST Cybersecurity Framework",
-      "version": "1.1",
+      "description": "System Framework",
+      "version": "2.0",
       "controlCount": 108,
-      "status": "active",
+      "status": "published",
       "type": "system",
       "icon": "nist"
     },
     {
       "id": 9,
       "name": "ISO27001",
-      "description": "Internet Security Management",
+      "description": "System Framework",
       "version": "2022",
       "controlCount": 114,
-      "status": "active",
+      "status": "published",
       "type": "system",
       "icon": "iso"
     }
