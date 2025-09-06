@@ -58,6 +58,7 @@ class API {
     }
     
     getMockFrameworks() {
+        console.log('Loading mock frameworks...');
         return [
             {
                 id: 1,
@@ -104,7 +105,6 @@ class API {
                 name: 'ISCF',
                 shortName: 'ISCF',
                 description: 'Internet Security Custom Framework',
-                status: 'published',
                 icon: 'assets/icons/ISCF.svg',
                 controlsCount: 45,
                 type: 'Custom Framework'
@@ -124,7 +124,6 @@ class API {
                 name: 'GDPR',
                 shortName: 'GDPR',
                 description: 'General Data Protection Regulation',
-                status: 'published',
                 icon: 'assets/icons/GDPR.svg',
                 controlsCount: 53,
                 type: 'System Framework'
@@ -134,7 +133,6 @@ class API {
                 name: 'NIST CSF',
                 shortName: 'NIST-CSF',
                 description: 'NIST Cybersecurity Framework',
-                status: 'published',
                 icon: 'assets/icons/CF.svg',
                 controlsCount: 67,
                 type: 'System Framework'
@@ -144,7 +142,6 @@ class API {
                 name: 'ISO27001',
                 shortName: 'ISO27001',
                 description: 'Internet Security Management',
-                status: 'published',
                 icon: 'assets/icons/ISCF.svg',
                 controlsCount: 89,
                 type: 'System Framework'

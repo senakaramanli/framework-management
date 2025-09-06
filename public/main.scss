@@ -489,7 +489,7 @@ body {
 
 // ------------------- Header -------------------
 .header {
-  padding: 2rem 2rem 0rem 2rem;
+  padding: 2rem 2rem 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1030;
@@ -699,7 +699,7 @@ body {
   }
   
   span {
-    color: $color-dark;
+    color: $color-info;
     font-size: 0.875rem;
   }
 }
@@ -763,3 +763,52 @@ body {
   }
 }
 
+
+// Framework card icon styling
+.framework-card__type {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  i {
+    font-size: 0.875rem;
+    color: inherit; 
+  }
+}
+
+
+// Custom SVG status icon styling
+.status-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  filter: inherit; // Inherit color from parent badge
+}
+
+.status-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  filter: inherit;
+}
+
+.framework-card__icon {
+  flex-shrink: 0;
+  flex-grow: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+}
+
+.framework-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}

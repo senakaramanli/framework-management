@@ -1,315 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Compliance Frameworks</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
-        <div class="container-fluid">
-            <div class="header__content">
-                <div class="header__title-section">
-                    <div class="header__icon">
-                        <img src="assets/icons/packate-variant-closed.svg" alt="Framework Icon" class="header-icon-img">
-                    </div>
-                    <div class="header__title-info">
-                        <h1 class="header__title" id="headerFrameworkTitle">Compliance Frameworks</h1>
-                        <nav class="breadcrumb">
-                            <span class="breadcrumb__item">Admin</span>
-                            <span class="breadcrumb__separator">></span>
-                            <span class="breadcrumb__item breadcrumb__item--active">Compliance Frameworks</span>
-                        </nav>
-                    </div>
-                </div>
-                <div class="header__actions">
-                    <button type="button" class="btn btn-secondary me-2" id="helpButton">
-                        ?   Help
-                    </button>
-                    <button type="button" class="btn btn-success" id="newFrameworkButton" data-action="new-framework">
-                        + New Custom Framework
-                        <span class="badge bg-light" id="headerBadge">1/3</span>
-                    </button>
-                </div>
+      <div class="container-fluid">
+        <div class="header__content">
+          <div class="header__title-section">
+            <div class="header__icon">
+              <img
+                src="assets/icons/packate-variant-closed.svg"
+                alt="Framework Icon"
+                class="header-icon-img"
+              />
             </div>
+            <div class="header__title-info">
+              <h1 class="header__title" id="headerFrameworkTitle">
+                Compliance Frameworks
+              </h1>
+              <nav class="breadcrumb">
+                <span class="breadcrumb__item">Admin</span>
+                <span class="breadcrumb__separator">></span>
+                <span class="breadcrumb__item breadcrumb__item--active"
+                  >Compliance Frameworks</span
+                >
+              </nav>
+            </div>
+          </div>
+          <div class="header__actions">
+            <button
+              type="button"
+              class="btn btn-secondary me-2"
+              id="helpButton"
+            >
+              ? Help
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="newFrameworkButton"
+              data-action="new-framework"
+            >
+              + New Custom Framework
+              <span class="badge bg-light" id="headerBadge">1/3</span>
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="main">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Left Sidebar - Framework List -->
-                <div class="sidebar-container">
-                    <div class="sidebar">
-                        <div class="sidebar__content">
-                            <div id="frameworkListContainer" class="framework-list">
-                                <!-- Framework cards will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>                        
-                
-                <!-- Right Content - Data Table -->                
-                <div class="content-container">
-                    <div class="data-table-container">
-                        <!-- Empty State (Default) -->
-                        <div class="data-table__placeholder" id="dataTablePlaceholder">
-                            <div class="placeholder_container">
-                                <div class="placeholder__icon">
-                                    <img src="assets/icons/Vector.svg" alt="Empty State" class="empty-state-icon">
-                                </div>
-                                <div class="placeholder__message">Please select framework from list in left side.
-                                <br/>
-                                <span>or </span><span class="placeholder__link">click here</span> to add new framework</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Data Table (Hidden by default) -->
-                        <div class="data-table" id="dataTable" style="display: none;">
-                            <div class="data-table__header">
-                                <div class="data-table__search">
-                                    <input type="text" class="form-control" placeholder="Search" id="searchInput">
-                                </div>
-                            </div>
-                            <div class="data-table__content">
-                                <table class="table" id="controlsTable">
-                                    <thead>
-                                        <tr>
-                                            <th class="sortable" data-sort="id">
-                                                Control ID
-                                                <i class="bi bi-arrow-up-down sort-indicator"></i>
-                                            </th>
-                                            <th class="sortable" data-sort="category">
-                                                Control Category
-                                                <i class="bi bi-arrow-up-down sort-indicator"></i>
-                                            </th>
-                                            <th class="sortable" data-sort="description">
-                                                Control Description
-                                                <i class="bi bi-arrow-up-down sort-indicator"></i>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="controlsTableBody">
-                                        <!-- Controls will be loaded here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="data-table__pagination">
-                                <div class="pagination-left">
-                                    <span>Show</span>
-                                    <select class="form-select form-select-sm d-inline-block w-auto mx-1" id="entriesPerPage">
-                                        <option value="10" selected>10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    <span>entries</span>
-                                </div>
-                                <div class="pagination-center">
-                                    <span class="pagination-info" id="paginationInfo">Showing 1 to 10 of 0 entries</span>
-                                </div>
-                                <div class="pagination-right">
-                                    <nav class="pagination-nav" id="paginationNav">
-                                        <button class="btn btn-sm btn-outline-secondary" id="prevBtn" disabled>Previous</button>
-                                        <button class="btn btn-sm btn-primary" data-page="1">1</button>
-                                        <button class="btn btn-sm btn-outline-secondary" data-page="2">2</button>
-                                        <button class="btn btn-sm btn-outline-secondary" data-page="3">3</button>
-                                        <button class="btn btn-sm btn-outline-secondary" data-page="4">4</button>
-                                        <span class="pagination-ellipsis">...</span>
-                                        <button class="btn btn-sm btn-outline-secondary" data-page="24">24</button>
-                                        <button class="btn btn-sm btn-outline-secondary" id="nextBtn" disabled>Next</button>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Left Sidebar - Framework List -->
+          <div class="sidebar-container">
+            <div class="sidebar">
+              <div class="sidebar__content">
+                <div id="frameworkListContainer" class="framework-list">
+                  <!-- Framework cards will be loaded here -->
                 </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Right Content - Data Table -->
+          <div class="content-container">
+            <div class="data-table-container">
+              <!-- Empty State (Default) -->
+              <div class="data-table__placeholder" id="dataTablePlaceholder">
+                <div class="placeholder_container">
+                  <div class="placeholder__icon">
+                    <img
+                      src="assets/icons/Vector.svg"
+                      alt="Empty State"
+                      class="empty-state-icon"
+                    />
+                  </div>
+                  <div class="placeholder__message">
+                    Please select framework from list in left side.
+                    <br />
+                    <span>or </span
+                    ><span class="placeholder__link">click here</span> to add
+                    new framework
+                  </div>
+                </div>
+              </div>
+
+              <!-- Data Table (Hidden by default) -->
+              <div class="data-table" id="dataTable" style="display: none">
+                <div class="data-table__header">
+                  <div class="data-table__search">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Search"
+                      id="searchInput"
+                    />
+                  </div>
+                </div>
+                <div class="data-table__content">
+                  <table class="table" id="controlsTable">
+                    <thead>
+                      <tr>
+                        <th class="sortable" data-sort="id">
+                          Control ID
+                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                        </th>
+                        <th class="sortable" data-sort="category">
+                          Control Category
+                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                        </th>
+                        <th class="sortable" data-sort="description">
+                          Control Description
+                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="controlsTableBody">
+                      <!-- Controls will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <div class="data-table__pagination">
+                  <div class="pagination-left">
+                    <span>Show</span>
+                    <select
+                      class="form-select form-select-sm d-inline-block w-auto mx-1"
+                      id="entriesPerPage"
+                    >
+                      <option value="10" selected>10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
+                    </select>
+                    <span>entries</span>
+                  </div>
+                  <div class="pagination-center">
+                    <span class="pagination-info" id="paginationInfo"
+                      >Showing 1 to 10 of 0 entries</span
+                    >
+                  </div>
+                  <div class="pagination-right">
+                    <nav class="pagination-nav" id="paginationNav">
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        id="prevBtn"
+                        disabled
+                      >
+                        Previous
+                      </button>
+                      <button class="btn btn-sm btn-primary" data-page="1">
+                        1
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        data-page="2"
+                      >
+                        2
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        data-page="3"
+                      >
+                        3
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        data-page="4"
+                      >
+                        4
+                      </button>
+                      <span class="pagination-ellipsis">...</span>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        data-page="24"
+                      >
+                        24
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        id="nextBtn"
+                        disabled
+                      >
+                        Next
+                      </button>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <!-- New Framework Modal -->
-    <div class="modal fade" id="newFrameworkModal" tabindex="-1" aria-labelledby="newFrameworkModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title-section">
-                        <h5 class="modal-title" id="newFrameworkModalLabel">Add New Framework 1/2</h5>
-                        <p class="modal-subtitle">Please fill in the details of the new framework.</p>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- License Banner -->
-                    <div class="license-banner">
-                        <i class="bi bi-info-circle"></i>
-                        <span>You can 1 Enterprise Framework license available.</span>
-                    </div>
-                    
-                    <!-- Stepper Progress -->
-                    <div class="stepper-progress" id="stepperProgress">
-                        <div class="stepper-step stepper-step--active" data-step="1">
-                            <div class="stepper-step__number">01</div>
-                            <div class="stepper-step__label">Framework Details</div>
-                        </div>
-                        <div class="stepper-step" data-step="2">
-                            <div class="stepper-step__number">02</div>
-                            <div class="stepper-step__label">Control Items</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Stepper Content -->
-                    <div class="stepper" id="frameworkStepper">
-                        <!-- Step 1: Framework Details -->
-                        <div class="stepper__step" data-step="1" data-active="true">
-                            <form id="frameworkForm" class="stepper__form" novalidate>
-                                <div class="form--container">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="frameworkName" class="form-label">Name</label>
-                                            <input type="text" class="form-control" id="frameworkName" name="name" 
-                                                   placeholder="Enter name" required minlength="2" maxlength="80">
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="frameworkShortName" class="form-label">Short Name</label>
-                                            <input type="text" class="form-control" id="frameworkShortName" name="shortName" 
-                                                   placeholder="Enter short name" required minlength="2" maxlength="16" 
-                                                   pattern="^[A-Z0-9\-_.]{2,16}$">
-                                            <div class="invalid-feedback"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="uploadLogo" class="form-label">Upload Framework Logo</label>
-                                    <div class="logo-upload">
-                                        <div class="logo-preview">
-                                            <i class="bi bi-image"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="frameworkDescription" class="form-label">Description</label>
-                                    <textarea class="form-control" id="frameworkDescription" name="description" 
-                                              rows="3" placeholder="Please add description" maxlength="500"></textarea>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="templateFile" class="form-label">Upload Template</label>
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-outline-secondary" id="selectFileBtn">
-                                            Select File
-                                        </button>
-                                        <span class="ms-2" id="fileName">No file selected</span>
-                                    </div>
-                                    <input type="file" class="form-control" id="templateFile" name="template" 
-                                           accept=".xlsx,.xls,.csv" style="display: none;">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <!-- Step 2: Control Items -->
-                        <div class="stepper__step" data-step="2" data-active="false">
-                            <div class="controls-crud">
-                                <div class="controls-crud__header">
-                                    <h6>Control Items</h6>
-                                    <button type="button" class="btn btn-secondary btn-sm" id="addControlBtn">
-                                        <i class="bi bi-plus"></i> Add Control Items
-                                    </button>
-                                </div>
-                                <div class="controls-crud__table">
-                                    <table class="table table-sm" id="controlsCrudTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Control ID</th>
-                                                <th>Category</th>
-                                                <th>Description</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="controlsCrudBody">
-                                            <tr>
-                                                <td>Article I-0 -1.1</td>
-                                                <td>Article I, Business Contact Information</td>
-                                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Article I-0 -1.2</td>
-                                                <td>Article I, Business Contact Information</td>
-                                                <td>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-success me-1" title="Approve">
-                                                        <i class="bi bi-check"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Article I-0 -1.3</td>
-                                                <td>Article I, Business Contact Information</td>
-                                                <td>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur...</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Article II-0</td>
-                                                <td>Article II, Technical and Organizational Measures</td>
-                                                <td>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</td>
-                                                <td class="text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    
-                    
-                    <button type="button" class="btn btn-primary" id="addControlBtn">+ Add Control Items</button>
-                    <button type="button" class="btn btn-success" id="nextStepBtn" data-stepper-next>Next > Control Items</button>
-                    <button type="button" class="btn btn-success" id="saveBtn" style="display: none;">Save</button>
-                </div>
+    <div
+      class="modal fade"
+      id="newFrameworkModal"
+      tabindex="-1"
+      aria-labelledby="newFrameworkModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title-section">
+              <h5 class="modal-title" id="newFrameworkModalLabel">
+                Add New Framework 1/2
+              </h5>
+              <p class="modal-subtitle">
+                Please fill in the details of the new framework.
+              </p>
             </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Stepper Progress -->
+            <div class="stepper-progress" id="stepperProgress">
+              <div class="stepper-step stepper-step--active" data-step="1">
+                <div class="stepper-step__number">01</div>
+                <div class="stepper-step__label">Framework Details</div>
+              </div>
+              <div class="stepper-step" data-step="2">
+                <div class="stepper-step__number">02</div>
+                <div class="stepper-step__label">Control Items</div>
+              </div>
+            </div>
+
+            <!-- Stepper Content -->
+            <div class="stepper" id="frameworkStepper">
+              <!-- Step 1: Framework Details -->
+              <!-- License Banner -->
+              <div class="license-banner">
+                <i class="bi bi-info-circle"></i>
+                <span>You can 1 Enterprise Framework license available.</span>
+              </div>
+              <div class="stepper__step" data-step="1" data-active="true">
+                <form id="frameworkForm" class="stepper__form" novalidate>
+                  <div class="form--container">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="frameworkName" class="form-label"
+                          >Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="frameworkName"
+                          name="name"
+                          placeholder="Enter name"
+                          required
+                          minlength="2"
+                          maxlength="80"
+                        />
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="frameworkShortName" class="form-label"
+                          >Short Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="frameworkShortName"
+                          name="shortName"
+                          placeholder="Enter short name"
+                          required
+                          minlength="2"
+                          maxlength="16"
+                          pattern="^[A-Z0-9\-_.]{2,16}$"
+                        />
+                        <div class="invalid-feedback"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="uploadLogo" class="form-label"
+                      >Upload Framework Logo</label
+                    >
+                    <div class="logo-upload">
+                      <div class="logo-preview">
+                        <i class="bi bi-image"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="frameworkDescription" class="form-label"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="frameworkDescription"
+                      name="description"
+                      rows="3"
+                      placeholder="Please add description"
+                      maxlength="500"
+                    ></textarea>
+                    <div class="invalid-feedback"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="templateFile" class="form-label"
+                      >Upload Template</label
+                    >
+                    <div class="input-group">
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        id="selectFileBtn"
+                      >
+                        Select File
+                      </button>
+                      <span class="ms-2" id="fileName">No file selected</span>
+                    </div>
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="templateFile"
+                      name="template"
+                      accept=".xlsx,.xls,.csv"
+                      style="display: none"
+                    />
+                    <div class="invalid-feedback"></div>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Step 2: Control Items -->
+              <div class="stepper__step" data-step="2" data-active="false">
+                <div class="controls-crud">
+                  <div class="controls-crud__header">
+                    <h6>Control Items</h6>
+                    <button
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                      id="addControlBtn"
+                    >
+                      <i class="bi bi-plus"></i> Add Control Items
+                    </button>
+                  </div>
+                  <div class="controls-crud__table">
+                    <table class="table table-sm" id="controlsCrudTable">
+                      <thead>
+                        <tr>
+                          <th>Control ID</th>
+                          <th>Category</th>
+                          <th>Description</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="controlsCrudBody">
+                        <tr>
+                          <td>Article I-0 -1.1</td>
+                          <td>Article I, Business Contact Information</td>
+                          <td>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua...
+                          </td>
+                          <td class="text-end">
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-primary me-1"
+                              title="Edit"
+                            >
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              title="Delete"
+                            >
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Article I-0 -1.2</td>
+                          <td>Article I, Business Contact Information</td>
+                          <td>
+                            Ut enim ad minim veniam, quis nostrud exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat...
+                          </td>
+                          <td class="text-end">
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-primary me-1"
+                              title="Edit"
+                            >
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-success me-1"
+                              title="Approve"
+                            >
+                              <i class="bi bi-check"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              title="Delete"
+                            >
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Article I-0 -1.3</td>
+                          <td>Article I, Business Contact Information</td>
+                          <td>
+                            Duis aute irure dolor in reprehenderit in voluptate
+                            velit esse cillum dolore eu fugiat nulla pariatur...
+                          </td>
+                          <td class="text-end">
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-primary me-1"
+                              title="Edit"
+                            >
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              title="Delete"
+                            >
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Article II-0</td>
+                          <td>
+                            Article II, Technical and Organizational Measures
+                          </td>
+                          <td>
+                            Excepteur sint occaecat cupidatat non proident, sunt
+                            in culpa qui officia deserunt mollit anim id est
+                            laborum...
+                          </td>
+                          <td class="text-end">
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-primary me-1"
+                              title="Edit"
+                            >
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-danger"
+                              title="Delete"
+                            >
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+
+            <button type="button" class="btn btn-primary" id="addControlBtn">
+              + Add Control Items
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="nextStepBtn"
+              data-stepper-next
+            >
+              Next > Control Items
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="saveBtn"
+              style="display: none"
+            >
+              Save
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -322,5 +532,5 @@
     <script src="js/Header.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>
