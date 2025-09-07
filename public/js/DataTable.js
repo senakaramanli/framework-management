@@ -163,7 +163,13 @@ class DataTable {
             this.placeholder.style.display = 'none';
         }
         if (this.container) {
+            this.hideLoading();
             this.container.style.display = 'block';
+            
+            // Hide placeholder during loading
+            if (this.placeholder) {
+                this.placeholder.style.display = 'none';
+            }
         }
     }
     
@@ -179,6 +185,27 @@ class DataTable {
     showLoading() {
         if (this.container) {
             this.container.classList.add('data-table--loading');
+            this.hideLoading();
+            this.container.style.display = 'block';
+            
+            // Hide placeholder during loading
+            if (this.placeholder) {
+                this.placeholder.style.display = 'none';
+            }
+            
+            const tbody = this.container.querySelector('#controlsTableBody');
+            if (tbody) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <div class="mt-2">Loading...</div>
+                        </td>
+                    </tr>
+                `;
+            }
         }
     }
     

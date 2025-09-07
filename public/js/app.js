@@ -69,12 +69,12 @@ class App {
     }
     
     onFrameworkSelected(framework) {
-        console.log('Framework selected:', framework);
         
         // Update header title
         this.updateHeaderTitle(framework.name);
         
         // Initialize data table with framework data
+        this.dataTable.showLoading();
         this.dataTable.initTable(framework.id, 1, 10);
     }
     

@@ -303,8 +303,8 @@ body {
   border-radius: 4px;
 }
 .data-table-container .data-table__pagination .pagination-right .pagination-nav .btn.btn-primary {
-  background: #3dcc77;
-  border-color: #3dcc77;
+  background: #495057;
+  border-color: #212529;
   color: #fff;
 }
 .data-table-container .data-table__pagination .pagination-right .pagination-nav .btn.btn-outline-secondary {
@@ -817,4 +817,57 @@ body {
 }
 .table tbody tr:nth-child(even) td {
   background-color: transparent !important;
+}
+
+.modal-header {
+  border: none;
+  padding-bottom: 0rem;
+}
+.modal-header .modal-title {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+.modal-header .modal-header-badge {
+  background-color: #CED4DA;
+  border-radius: 8px;
+}
+
+.modal-body {
+  padding-top: 0rem;
+}
+
+.modal-footer {
+  border: none;
+  padding-top: 0rem;
+}
+
+.modal .text-end {
+  display: flex;
+  column-gap: 0.5rem;
+  height: 100%;
+  border: none;
+}
+.modal tbody, .modal tr {
+  border: hidden !important;
+}
+.modal .btn {
+  border: hidden;
+}
+.modal .btn.btn-submit {
+  background-color: #3dcc77;
+}
+.modal .btn.btn-light-gray {
+  background-color: #F8F9FA;
+}
+.modal .btn.btn-gray {
+  background-color: #6c757d;
+}
+.modal .btn-edit {
+  background-color: #6c757d;
+  color: #fff;
+}
+.modal .btn-delete {
+  background-color: #dc3545;
+  color: #fff;
 }

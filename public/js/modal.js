@@ -75,15 +75,6 @@ class ModalManager {
                 this.handleFileSelection(e);
             });
         }
-        
-        // Add control button
-        const addControlBtn = document.getElementById('addControlBtn');
-        if (addControlBtn) {
-            addControlBtn.addEventListener('click', () => {
-                this.addControl();
-            });
-        }
-        
         // Form submission
         const nextStepBtn = document.getElementById('nextStepBtn');
         if (nextStepBtn) {
@@ -266,14 +257,11 @@ class ModalManager {
                 <td>${control.category}</td>
                 <td>${control.description}</td>
                 <td class="text-end">
-                    <button type="button" class="btn btn-sm btn-outline-primary me-1" title="Edit" onclick="modalManager.editControl(${index})">
-                        <i class="bi bi-pencil"></i>
+                    <button type="button" class="btn btn-sm btn-edit" title="Edit" onclick="modalManager.editControl(${index})">
+                         <img src="assets/icons/pencil.svg" alt="sort">
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-success me-1" title="Approve" onclick="modalManager.approveControl(${index})">
-                        <i class="bi bi-check"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" onclick="modalManager.deleteControl(${index})">
-                        <i class="bi bi-trash"></i>
+                    <button type="button" class="btn btn-sm btn-delete" title="Delete" onclick="modalManager.deleteControl(${index})">
+                         <img src="assets/icons/delete.svg" alt="sort">
                     </button>
                 </td>
             </tr>
@@ -387,30 +375,43 @@ class ModalManager {
     updateModalTitle(step) {
         const modalTitle = document.getElementById('newFrameworkModalLabel');
         if (modalTitle) {
-            modalTitle.textContent = `Add New Framework ${step}/2`;
+            modalTitle.innerHTML = `Add New Framework <span class="badge modal-header-badge ms-2">${step}/2</span>`;
         }
     }
     
-    updateNavigationButtons(step) {
-        const prevBtn = document.getElementById('prevStepBtn');
-        const nextBtn = document.getElementById('nextStepBtn');
-        
-        if (prevBtn) {
-            prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
-        }
-        
-        if (nextBtn) {
-            if (step === 2) {
-                nextBtn.textContent = 'Save';
-                nextBtn.classList.add('btn-success');
-                nextBtn.classList.remove('btn-primary');
-            } else {
-                nextBtn.textContent = 'Next > Control Items';
-                nextBtn.classList.add('btn-primary');
-                nextBtn.classList.remove('btn-success');
-            }
-        }
+updateNavigationButtons(step) {
+  const prevBtn = document.getElementById('prevStepBtn');
+  const nextBtn = document.getElementById('nextStepBtn');
+  const addControlBtn = document.getElementById('addControlBtn');
+
+  if (prevBtn) {
+    prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
+  }
+
+  if (nextBtn) {
+    if (step === 2) {
+      nextBtn.textContent = 'Save';
+      nextBtn.classList.add('btn-success');
+      nextBtn.classList.remove('btn-primary');
+    } else {
+      nextBtn.textContent = 'Next > Control Items';
+      nextBtn.classList.add('btn-primary');
+      nextBtn.classList.remove('btn-success');
     }
+  }
+
+  // <<< BUTON GÖRÜNÜRLÜĞÜ BURADA KONTROL EDİLİYOR >>>
+  if (addControlBtn) {
+    if (step === 2) {
+      addControlBtn.style.display = 'inline-block';
+      addControlBtn.classList.add('btn-secondary');
+      addControlBtn.classList.remove('btn-primary');
+    } else {
+      addControlBtn.style.display = 'none';
+    }
+  }
+}
+
     
     open() {
         const modal = new bootstrap.Modal(this.modal);
@@ -432,3 +433,15 @@ const modalManager = new ModalManager();
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ModalManager;
 }
+
+        // Add Control Items button visibility
+        const addControlBtn = document.getElementById("addControlBtn");
+        if (addControlBtn) {
+            if (step === 2) {
+                addControlBtn.style.display = "inline-block";
+                addControlBtn.classList.add("btn-secondary");
+                addControlBtn.classList.remove("btn-primary");
+            } else {
+                addControlBtn.style.display = "none";
+            }
+        }

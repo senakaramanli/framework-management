@@ -22,8 +22,10 @@ $color-dark: #212529;
 $color-secondary: #6c757d;
 $color-disabled: #94a3b8;
 $color-light-gray: #e9ecef;
-$color-gray-700: #495057;
 
+$color-gray-100: #F8F9FA;
+$color-gray-400:#CED4DA;
+$color-gray-700: #495057;
 $color-purple-100: #e2d9f3;
 $color-info-100: #cff4fc;
 $color-purple-500: #6f42c1;
@@ -410,8 +412,8 @@ body {
             border-radius: 4px;
 
             &.btn-primary {
-              background: $color-primary;
-              border-color: $color-primary;
+              background: $color-gray-700;
+              border-color: $color-dark;
               color: $color-white;
             }
 
@@ -1038,3 +1040,71 @@ body {
     }
   }
 }
+
+// ------------------- Modal -------------------
+
+.modal-header{
+  border:none;
+  padding-bottom: 0rem;
+
+  .modal-title{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+  }
+
+  .modal-header-badge{
+    background-color: $color-gray-400;
+    border-radius: 8px;
+  }
+}
+
+.modal-body{
+   padding-top: 0rem;
+}
+
+.modal-footer{
+    border:none;
+     padding-top: 0rem;
+}
+
+.modal{
+
+  .text-end{
+    display: flex;
+    column-gap: 0.5rem;
+    height: 100%;
+    border: none;
+  }
+
+  tbody, tr{
+     border: hidden !important; 
+  }
+
+  .btn {
+      border: hidden;
+    &.btn-submit {
+      background-color: $color-primary;
+    }
+
+        &.btn-light-gray{
+      background-color: $color-gray-100;
+    }
+
+            &.btn-gray{
+      background-color: $color-muted;
+    }
+
+  }
+
+  .btn-edit {
+    background-color: $color-muted;
+    color: $color-white;
+  }
+
+    .btn-delete {
+    background-color: $color-danger;
+     color: $color-white;
+  }
+}
+
