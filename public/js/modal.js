@@ -199,18 +199,22 @@ class ModalManager {
             data.templateFile = templateFile.files[0];
         }
         
+        // Clear previous validation messages
+        this.clearValidationMessages();
+        
         // Basic validation
+        let isValid = true;
         if (!data.name || data.name.trim().length < 2) {
-            alert('Please enter a valid framework name (at least 2 characters)');
-            return false;
+            this.showValidationMessage('frameworkName', 'Please enter a valid framework name (at least 2 characters)');
+            isValid = false;
         }
         
         if (!data.shortName || data.shortName.trim().length < 2) {
-            alert('Please enter a valid short name (at least 2 characters)');
-            return false;
+            this.showValidationMessage('frameworkShortName', 'Please enter a valid short name (at least 2 characters)');
+            isValid = false;
         }
         
-        return true;
+        return isValid;
     }
     
     addControl() {
@@ -379,39 +383,63 @@ class ModalManager {
         }
     }
     
-updateNavigationButtons(step) {
-  const prevBtn = document.getElementById('prevStepBtn');
-  const nextBtn = document.getElementById('nextStepBtn');
-  const addControlBtn = document.getElementById('addControlBtn');
+    updateNavigationButtons(step) {
+      const prevBtn = document.getElementById('prevStepBtn');
+      const nextBtn = document.getElementById('nextStepBtn');
+      const addControlBtn = document.getElementById('addControlBtn');
 
-  if (prevBtn) {
-    prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
-  }
+      if (prevBtn) {
+        prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
+      }
 
-  if (nextBtn) {
-    if (step === 2) {
-      nextBtn.textContent = 'Save';
-      nextBtn.classList.add('btn-success');
-      nextBtn.classList.remove('btn-primary');
-    } else {
-      nextBtn.textContent = 'Next > Control Items';
-      nextBtn.classList.add('btn-primary');
-      nextBtn.classList.remove('btn-success');
+      if (nextBtn) {
+        if (step === 2) {
+          nextBtn.textContent = 'Save';
+          nextBtn.classList.add('btn-success');
+          nextBtn.classList.remove('btn-primary');
+        } else {
+          nextBtn.textContent = 'Next > Control Items';
+          nextBtn.classList.add('btn-primary');
+          nextBtn.classList.remove('btn-success');
+        }
+      }
+
+      // <<< BUTON GÖRÜNÜRLÜĞÜ BURADA KONTROL EDİLİYOR >>>
+      if (addControlBtn) {
+        if (step === 2) {
+          addControlBtn.style.display = 'inline-block';
+          addControlBtn.classList.add('btn-secondary');
+          addControlBtn.classList.remove('btn-primary');
+        } else {
+          addControlBtn.style.display = 'none';
+        }
+      }
     }
-  }
 
-  // <<< BUTON GÖRÜNÜRLÜĞÜ BURADA KONTROL EDİLİYOR >>>
-  if (addControlBtn) {
-    if (step === 2) {
-      addControlBtn.style.display = 'inline-block';
-      addControlBtn.classList.add('btn-secondary');
-      addControlBtn.classList.remove('btn-primary');
-    } else {
-      addControlBtn.style.display = 'none';
+    clearValidationMessages() {
+        const validationMessages = document.querySelectorAll(".validation-message");
+        validationMessages.forEach(msg => msg.remove());
     }
-  }
-}
-
+    
+    showValidationMessage(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            // Remove existing validation message
+            const existingMsg = field.parentNode.querySelector(".validation-message");
+            if (existingMsg) {
+                existingMsg.remove();
+            }
+            
+            // Create validation message
+            const validationMsg = document.createElement("div");
+            validationMsg.className = "validation-message text-danger mt-1";
+            validationMsg.style.fontSize = "0.875rem";
+            validationMsg.textContent = message;
+            
+            // Insert after the field
+            field.parentNode.insertBefore(validationMsg, field.nextSibling);
+        }
+    }
     
     open() {
         const modal = new bootstrap.Modal(this.modal);
@@ -433,15 +461,3 @@ const modalManager = new ModalManager();
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ModalManager;
 }
-
-        // Add Control Items button visibility
-        const addControlBtn = document.getElementById("addControlBtn");
-        if (addControlBtn) {
-            if (step === 2) {
-                addControlBtn.style.display = "inline-block";
-                addControlBtn.classList.add("btn-secondary");
-                addControlBtn.classList.remove("btn-primary");
-            } else {
-                addControlBtn.style.display = "none";
-            }
-        }

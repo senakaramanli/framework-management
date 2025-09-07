@@ -24,6 +24,7 @@ class Stepper {
     init() {
         this.updateStepVisibility();
         this.updateProgress();
+        console.log(`Stepper: moved to step ${this.currentStep}`);
         this.bindEvents();
         
         if (this.options.onChange) {
@@ -79,6 +80,7 @@ class Stepper {
         this.currentStep = stepNumber;
         this.updateStepVisibility();
         this.updateProgress();
+        console.log(`Stepper: moved to step ${this.currentStep}`);
         
         if (this.options.onChange) {
             this.options.onChange(this.currentStep);
@@ -112,7 +114,27 @@ class Stepper {
     
     updateProgress() {
         const progressContainer = this.container.querySelector('.stepper-progress');
-        if (!progressContainer) return;
+        console.log('Progress container found:', progressContainer);
+        if (!progressContainer) {
+            console.log('Progress container not found, searching in document');
+            const docProgressContainer = document.querySelector('.stepper-progress');
+            if (docProgressContainer) {
+                console.log('Found progress container in document');
+                const progressSteps = docProgressContainer.querySelectorAll('.stepper-step');
+                progressSteps.forEach((step, index) => {
+                    const stepNumber = index + 1;
+                    step.classList.remove('stepper-step--active', 'stepper-step--completed');
+                    if (stepNumber === this.currentStep) {
+                        step.classList.add('stepper-step--active');
+                        console.log(`Step ${stepNumber}: added active class`);
+                    } else if (stepNumber < this.currentStep) {
+                        step.classList.add('stepper-step--active');
+                        console.log(`Step ${stepNumber}: adding active class (previous step)`);
+                    }
+                });
+            }
+            return;
+        }
         
         const progressSteps = progressContainer.querySelectorAll('.stepper-step');
         
@@ -122,8 +144,11 @@ class Stepper {
             
             if (stepNumber === this.currentStep) {
                 step.classList.add('stepper-step--active');
+                console.log(`Step ${stepNumber}: added active class`);
             } else if (stepNumber < this.currentStep) {
-                step.classList.add('stepper-step--completed');
+                console.log(`Step ${stepNumber}: adding active class (previous step)`);
+                step.classList.add('stepper-step--active');
+                console.log(`Step ${stepNumber}: added active class`);
             }
         });
         

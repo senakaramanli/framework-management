@@ -1108,3 +1108,20 @@ body {
   }
 }
 
+
+// ------------------- Stepper Step Number Cycle -------------------
+.stepper-step__number {
+  position: relative;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid $color-primary;
+    border-radius: 50%;
+    z-index: -1;
+  }
+}
