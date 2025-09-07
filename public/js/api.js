@@ -170,37 +170,37 @@ class API {
             {
                 id: 'Article I-0-1.1',
                 category: 'Article I, Business Contact Information',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+                description: "Company and Supplier may Process the other's BCI wherever they do business in connection with Supplier's delivery of Services and Deliverables."
             },
             {
                 id: 'Article I-0-1.2',
                 category: 'Article I, Business Contact Information',
-                description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+                description: "A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party."
             },
             {
                 id: 'Article I-0-1.3',
                 category: 'Article I, Business Contact Information',
-                description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                description: "A party: (a) will not use or disclose the other party's BCI for any other purpose (for clarity, neither party will Sell the other's BCI or use or disclose the other's BCI for any marketing purpose without the other party's prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other's BCI, promptly on written request from the other party."
             },
             {
                 id: 'Article II-0',
                 category: 'Article II, Technical and Organizational Measures',
-                description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.'
+                description: "The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship."
             },
             {
                 id: 'Article VIII-1-1.4',
                 category: 'Article VIII, Data Protection Impact Assessment',
-                description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+                description: "This Article applies if Supplier Processes Company Data, other than Company's BCI. Supplier will comply with the requirements of this Article in providing all Services and Deliverables, and by doing so protect Company Data against loss, destruction, alteration, accidental or unauthorized disclosure, accidental or unauthorized access, and unlawful forms of Processing. The requirements of this Article extend to all IT applications, platforms, and infrastructure that Supplier operates or manages in providing Deliverables and Services, including all development, testing, hosting, support, operations, and data center environments."
             },
             {
                 id: 'Article III-2-1.1',
                 category: 'Article III, Data Subject Rights',
-                description: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'
+                description: "The parties are not entering a joint Controller relationship regarding each other's BCI and no provision of the Transaction Document will be interpreted or construed as indicating any intent to establish a joint Controller relationship."
             },
             {
                 id: 'Article IV-1-2.3',
                 category: 'Article IV, Data Processing Principles',
-                description: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.'
+                description: "A party: (a) will not use or disclose the other party’s BCI for any other purpose (for clarity, neither party will Sell the other’s BCI or use or disclose the other’s BCI for any marketing purpose without the other party’s prior written consent, and where required, the prior written consent of affected Data Subjects), and (b) will delete, modify, correct, return, provide information about the Processing of, restrict the Processing of, or take any other reasonably requested action in respect of the other’s BCI, promptly on written request from the other party."
             },
             {
                 id: 'Article V-0-1.5',

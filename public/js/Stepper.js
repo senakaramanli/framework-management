@@ -124,7 +124,7 @@ class Stepper {
     }
     
     updateProgress() {
-        const progressContainer = this.container.querySelector(this.options.progressSelector);
+        const progressContainer = document.querySelector(this.options.progressSelector);
         
         if (!progressContainer) {
             return;
