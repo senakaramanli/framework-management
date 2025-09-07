@@ -101,6 +101,7 @@ class API {
                 name: 'ISCF',
                 shortName: 'ISCF',
                 description: 'Internet Security Custom Framework',
+                status: 'published',
                 icon: 'assets/icons/ISCF.svg',
                 controlsCount: 45,
                 type: 'Custom Framework'
