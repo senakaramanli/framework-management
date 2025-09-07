@@ -20,14 +20,7 @@ A pixel-perfect compliance frameworks management interface built with Bootstrap 
 
 ## Installation
 
-1. **Clone and install**
-   ```bash
-   git clone <repository-url>
-   cd BK-Case
-   npm install
-   ```
-
-2. **Start development server**
+ **Start development server**
    ```bash
    npm run start
    ```
@@ -58,17 +51,6 @@ A pixel-perfect compliance frameworks management interface built with Bootstrap 
 - **Step 2**: Add control items
 - Form validation prevents invalid progression
 
-## Design System
-
-### Colors
-- **Background**: #eff0f3
-- **Card Background**: #ffffff
-- **Primary**: #3DCC77 (Green)
-- **Info**: #60a5fa (Blue)
-- **Warning**: #f59e0b (Orange)
-- **Danger**: #ef4444 (Red)
-- **Ready to Map**: #8B5CF6 (Purple)
-
 ### Layout
 - **Sidebar Width**: 480px fixed
 - **Responsive**: Mobile-friendly with column layout
@@ -78,7 +60,7 @@ A pixel-perfect compliance frameworks management interface built with Bootstrap 
 
 ```
 ├── public/
-│   ├── index.html          # Main HTML
+│   ├── index.html         # Main HTML
 │   ├── main.scss          # SASS source
 │   ├── main.css           # Compiled CSS
 │   ├── js/                # JavaScript modules
@@ -94,14 +76,3 @@ A pixel-perfect compliance frameworks management interface built with Bootstrap 
 │   └── mock/              # Mock data
 └── package.json           # Dependencies
 ```
-
-## Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-## License
-
-MIT License
