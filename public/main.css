@@ -214,7 +214,7 @@ body {
 .data-table-container .data-table__content {
   overflow-x: auto;
   padding: 1rem 1rem;
-  max-height: 600px;
+  max-height: auto;
   overflow-y: auto;
 }
 .data-table-container .data-table table {
@@ -301,6 +301,11 @@ body {
 .data-table-container .data-table__pagination .pagination-center .pagination-info {
   font-size: 0.75rem;
   color: #6c757d;
+}
+@media (max-width: 767px) {
+  .data-table-container .data-table__pagination .pagination-center .pagination-info {
+    display: none;
+  }
 }
 .data-table-container .data-table__pagination .pagination-right .pagination-nav {
   display: flex;

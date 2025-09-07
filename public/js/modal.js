@@ -33,6 +33,9 @@ class ModalManager {
         if (!stepperContainer) return;
         
         this.stepper = new Stepper(stepperContainer, {
+            stepsSelector: ".stepper__step",
+            progressSelector: ".stepper-progress",
+            stepSelector: ".stepper-step",
             start: 1,
             onChange: (step) => {
                 this.updateModalTitle(step);
