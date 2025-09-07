@@ -2,6 +2,7 @@
  * Generic Stepper Component
  * State machine approach with data-* attributes
  * NO show/hide functions - only CSS-based visibility
+ * Can be used for any stepper implementation
  */
 class Stepper {
     constructor(container, options = {}) {
@@ -9,8 +10,11 @@ class Stepper {
         this.options = {
             start: 1,
             stepsSelector: '[data-step]',
+            progressSelector: '.stepper-progress',
+            stepSelector: '.stepper-step',
             onBeforeChange: null,
             onChange: null,
+            onComplete: null,
             ...options
         };
         
@@ -24,7 +28,6 @@ class Stepper {
     init() {
         this.updateStepVisibility();
         this.updateProgress();
-        console.log(`Stepper: moved to step ${this.currentStep}`);
         this.bindEvents();
         
         if (this.options.onChange) {
@@ -61,6 +64,10 @@ class Stepper {
         return this.currentStep;
     }
     
+    getTotalSteps() {
+        return this.steps.length;
+    }
+    
     goTo(stepNumber) {
         if (stepNumber < 1 || stepNumber > this.steps.length) {
             console.warn(`Step ${stepNumber} is out of range`);
@@ -80,10 +87,14 @@ class Stepper {
         this.currentStep = stepNumber;
         this.updateStepVisibility();
         this.updateProgress();
-        console.log(`Stepper: moved to step ${this.currentStep}`);
         
         if (this.options.onChange) {
             this.options.onChange(this.currentStep);
+        }
+        
+        // Check if completed
+        if (this.currentStep === this.steps.length && this.options.onComplete) {
+            this.options.onComplete();
         }
         
         return true;
@@ -113,30 +124,13 @@ class Stepper {
     }
     
     updateProgress() {
-        const progressContainer = this.container.querySelector('.stepper-progress');
-        console.log('Progress container found:', progressContainer);
+        const progressContainer = this.container.querySelector(this.options.progressSelector);
+        
         if (!progressContainer) {
-            console.log('Progress container not found, searching in document');
-            const docProgressContainer = document.querySelector('.stepper-progress');
-            if (docProgressContainer) {
-                console.log('Found progress container in document');
-                const progressSteps = docProgressContainer.querySelectorAll('.stepper-step');
-                progressSteps.forEach((step, index) => {
-                    const stepNumber = index + 1;
-                    step.classList.remove('stepper-step--active', 'stepper-step--completed');
-                    if (stepNumber === this.currentStep) {
-                        step.classList.add('stepper-step--active');
-                        console.log(`Step ${stepNumber}: added active class`);
-                    } else if (stepNumber < this.currentStep) {
-                        step.classList.add('stepper-step--active');
-                        console.log(`Step ${stepNumber}: adding active class (previous step)`);
-                    }
-                });
-            }
             return;
         }
         
-        const progressSteps = progressContainer.querySelectorAll('.stepper-step');
+        const progressSteps = progressContainer.querySelectorAll(this.options.stepSelector);
         
         progressSteps.forEach((step, index) => {
             const stepNumber = index + 1;
@@ -144,28 +138,10 @@ class Stepper {
             
             if (stepNumber === this.currentStep) {
                 step.classList.add('stepper-step--active');
-                console.log(`Step ${stepNumber}: added active class`);
             } else if (stepNumber < this.currentStep) {
-                console.log(`Step ${stepNumber}: adding active class (previous step)`);
                 step.classList.add('stepper-step--active');
-                console.log(`Step ${stepNumber}: added active class`);
             }
         });
-        
-        // Update modal title
-        const modalTitle = document.querySelector('#newFrameworkModalLabel');
-        if (modalTitle) {
-            modalTitle.textContent = `Add New Framework ${this.currentStep}/${this.steps.length}`;
-        }
-        
-        // Update header badge
-        const headerBadge = document.querySelector('#headerBadge');
-        if (headerBadge) {
-            headerBadge.textContent = `${this.currentStep}/${this.steps.length}`;
-        }
-        
-        // Update navigation buttons
-        this.updateNavigationButtons();
     }
     
     updateNavigationButtons() {
@@ -173,11 +149,7 @@ class Stepper {
         const nextBtn = this.container.querySelector('[data-stepper-next]');
         
         if (prevBtn) {
-            if (this.currentStep === 1) {
-                prevBtn.style.display = 'none';
-            } else {
-                prevBtn.style.display = 'inline-block';
-            }
+            prevBtn.style.display = this.currentStep === 1 ? 'none' : 'inline-block';
         }
         
         if (nextBtn) {
@@ -186,7 +158,7 @@ class Stepper {
                 nextBtn.classList.add('btn-success');
                 nextBtn.classList.remove('btn-primary');
             } else {
-                nextBtn.textContent = `Next > Control Items`;
+                nextBtn.textContent = 'Next';
                 nextBtn.classList.add('btn-primary');
                 nextBtn.classList.remove('btn-success');
             }
