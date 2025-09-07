@@ -2,7 +2,6 @@
  * Data Table Component
  * Manages the controls table with pagination and actions
  */
-
 class DataTable {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
@@ -14,7 +13,8 @@ class DataTable {
         this.totalItems = 0;
         this.totalPages = 0;
         this.data = [];
-        
+        this.sortField = null;        
+        this.sortDirection = "asc";
         this.init();
     }
     
@@ -23,24 +23,20 @@ class DataTable {
     }
     
     async initTable(frameworkId, page = 1, pageSize = 10) {
-        // Destroy existing table if it exists
         this.destroy();
         
         this.currentFrameworkId = frameworkId;
         this.currentPage = page;
         this.pageSize = pageSize;
         
-        // Show loading state
         this.showLoading();
         
         try {
-            // Load data
             const response = await api.getTablePage(frameworkId, page, pageSize);
             this.data = response.data || [];
             this.totalItems = response.pagination?.totalItems || 0;
             this.totalPages = response.pagination?.totalPages || 0;
             
-            // Render table
             this.render();
             this.showTable();
             
@@ -53,7 +49,6 @@ class DataTable {
     render() {
         if (!this.container) return;
         
-        // Render table body
         const tbody = this.container.querySelector('#controlsTableBody');
         if (tbody) {
             tbody.innerHTML = this.data.map(control => 
@@ -61,10 +56,8 @@ class DataTable {
             ).join('');
         }
         
-        // Update pagination
         this.updatePagination();
         
-        // Update pagination info
         this.updatePaginationInfo();
     }
     
@@ -88,10 +81,8 @@ class DataTable {
         const paginationNav = this.container.querySelector('#paginationNav');
         if (!paginationNav) return;
         
-        // Clear existing pagination
         paginationNav.innerHTML = '';
         
-        // Previous button
         const prevBtn = document.createElement('button');
         prevBtn.className = 'btn btn-sm btn-outline-secondary';
         prevBtn.id = 'prevBtn';
@@ -100,11 +91,9 @@ class DataTable {
         prevBtn.addEventListener('click', () => this.goToPage(this.currentPage - 1));
         paginationNav.appendChild(prevBtn);
         
-        // Page numbers
         const startPage = Math.max(1, this.currentPage - 2);
         const endPage = Math.min(this.totalPages, this.currentPage + 2);
         
-        // First page
         if (startPage > 1) {
             const firstBtn = this.createPageButton(1);
             paginationNav.appendChild(firstBtn);
@@ -117,13 +106,11 @@ class DataTable {
             }
         }
         
-        // Page range
         for (let i = startPage; i <= endPage; i++) {
             const pageBtn = this.createPageButton(i);
             paginationNav.appendChild(pageBtn);
         }
         
-        // Last page
         if (endPage < this.totalPages) {
             if (endPage < this.totalPages - 1) {
                 const ellipsis = document.createElement('span');
@@ -136,7 +123,6 @@ class DataTable {
             paginationNav.appendChild(lastBtn);
         }
         
-        // Next button
         const nextBtn = document.createElement('button');
         nextBtn.className = 'btn btn-sm btn-outline-secondary';
         nextBtn.id = 'nextBtn';
@@ -223,7 +209,6 @@ class DataTable {
     bindEvents() {
         if (!this.container) return;
         
-        // Search functionality
         const searchInput = document.querySelector('#searchInput');
         if (searchInput) {
             let searchTimeout;
@@ -235,7 +220,6 @@ class DataTable {
             });
         }
         
-        // Page size change
         const entriesPerPage = document.querySelector('#entriesPerPage');
         if (entriesPerPage) {
             entriesPerPage.addEventListener('change', (e) => {
@@ -245,7 +229,6 @@ class DataTable {
         }
         
         
-        // Sorting
         this.container.addEventListener('click', (e) => {
             const sortableHeader = e.target.closest('.sortable');
             if (sortableHeader) {
@@ -277,11 +260,19 @@ class DataTable {
     }
     
     handleSort(field) {
+        // Toggle sort direction if same field
+        if (this.sortField === field) {
+            this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
+        } else {
+            this.sortField = field;
+            this.sortDirection = "asc";
+        }
         // Simple client-side sorting for demo
         this.data.sort((a, b) => {
             const aVal = a[field] || '';
             const bVal = b[field] || '';
-            return aVal.localeCompare(bVal);
+            const result = aVal.localeCompare(bVal);
+            return this.sortDirection === "asc" ? result : -result;
         });
         
         this.render();

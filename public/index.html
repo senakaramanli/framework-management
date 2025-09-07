@@ -96,9 +96,11 @@
                   <div class="placeholder__message">
                     Please select framework from list in left side.
                     <br />
+                    <div>
                     <span>or </span
                     ><span class="placeholder__link">click here</span> to add
                     new framework
+                    </div>
                   </div>
                 </div>
               </div>
@@ -106,11 +108,11 @@
               <!-- Data Table (Hidden by default) -->
               <div class="data-table" id="dataTable" style="display: none">
                 <div class="data-table__header">
+                  <div>Search</div>
                   <div class="data-table__search">
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Search"
                       id="searchInput"
                     />
                   </div>
@@ -121,15 +123,17 @@
                       <tr>
                         <th class="sortable" data-sort="id">
                           Control ID
-                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                          <img src="assets/icons/arrow.svg" alt="sort" class="sort-indicator">
+                          
                         </th>
                         <th class="sortable" data-sort="category">
                           Control Category
-                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                          <img src="assets/icons/arrow.svg" alt="sort" class="sort-indicator">
+                          
                         </th>
-                        <th class="sortable" data-sort="description">
+                        <th data-sort="description">
                           Control Description
-                          <i class="bi bi-arrow-up-down sort-indicator"></i>
+                          
                         </th>
                       </tr>
                     </thead>
@@ -219,7 +223,7 @@
       aria-labelledby="newFrameworkModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <div class="modal-title-section">
@@ -300,16 +304,19 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="uploadLogo" class="form-label"
-                      >Upload Framework Logo</label
-                    >
-                    <div class="logo-upload">
-                      <div class="logo-preview">
-                        <i class="bi bi-image"></i>
-                      </div>
+                    <div class="logo-upload-field">
+                      <span class="logo-upload-text"
+                        >Upload Framework Logo</span
+                      >
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="uploadLogo"
+                        name="uploadLogo"
+                      />
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group form-content">
                     <label for="frameworkDescription" class="form-label"
                       >Description</label
                     >
@@ -323,19 +330,25 @@
                     ></textarea>
                     <div class="invalid-feedback"></div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group form-content">
                     <label for="templateFile" class="form-label"
                       >Upload Template</label
                     >
-                    <div class="input-group">
+                    <div class="file-upload-field">
                       <button
                         type="button"
-                        class="btn btn-outline-secondary"
+                        class="btn btn-secondary"
                         id="selectFileBtn"
                       >
                         Select File
                       </button>
-                      <span class="ms-2" id="fileName">No file selected</span>
+                      <input
+                        type="text"
+                        class="form-control file-input-display"
+                        id="fileName"
+                        placeholder="No file selected"
+                        readonly
+                      />
                     </div>
                     <input
                       type="file"
@@ -345,6 +358,7 @@
                       accept=".xlsx,.xls,.csv"
                       style="display: none"
                     />
+                    <div class="invalid-feedback"></div>
                     <div class="invalid-feedback"></div>
                   </div>
                 </form>
@@ -367,7 +381,8 @@
                     <table class="table table-sm" id="controlsCrudTable">
                       <thead>
                         <tr>
-                          <th>Control ID</th>
+                          <th>Control ID
+                          <img src="assets/icons/arrow.svg" alt="sort" class="sort-indicator"></th>
                           <th>Category</th>
                           <th>Description</th>
                           <th>Actions</th>
