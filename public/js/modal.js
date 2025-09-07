@@ -305,8 +305,6 @@ class ModalManager {
     }
     
     async submitForm() {
-        console.log('Submit form called');
-        console.log('Framework list:', this.frameworkList);
         
         const form = document.getElementById('frameworkForm');
         if (!form) {
@@ -326,7 +324,7 @@ class ModalManager {
         
         // Create new framework object
         const newFramework = {
-            id: Date.now(), // Simple ID generation
+            id: Date.now(),
             name: data.name,
             shortName: data.shortName,
             description: data.description || '',
@@ -336,25 +334,15 @@ class ModalManager {
             controls: this.controls
         };
         
-        console.log('New framework created:', newFramework);
-        
         try {
             // Add to framework list
             if (this.frameworkList) {
-                console.log('Adding to framework list...');
-                // Add to the frameworks array
+
                 this.frameworkList.frameworks.unshift(newFramework);
-                console.log('Framework added to list. Total frameworks:', this.frameworkList.frameworks.length);
-                
-                // Re-render the framework list
                 this.frameworkList.render();
                 this.frameworkList.bindEvents();
-                console.log('Framework list re-rendered');
             } else {
-                console.error('Framework list not available');
-                // Fallback: try to get framework list from global app
                 if (window.app && window.app.frameworkList) {
-                    console.log('Using fallback framework list from app');
                     window.app.frameworkList.frameworks.unshift(newFramework);
                     window.app.frameworkList.render();
                     window.app.frameworkList.bindEvents();
@@ -404,7 +392,6 @@ class ModalManager {
         }
       }
 
-      // <<< BUTON GÖRÜNÜRLÜĞÜ BURADA KONTROL EDİLİYOR >>>
       if (addControlBtn) {
         if (step === 2) {
           addControlBtn.style.display = 'inline-block';
@@ -454,10 +441,8 @@ class ModalManager {
     }
 }
 
-// Create global modal manager instance
 const modalManager = new ModalManager();
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ModalManager;
 }

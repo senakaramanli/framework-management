@@ -2,7 +2,6 @@
  * Framework List Component
  * Manages the sidebar framework list and selection
  */
-
 class FrameworkList {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
@@ -42,7 +41,7 @@ class FrameworkList {
     }
 
     const frameworksHtml = this.frameworks
-      .filter(framework => true)
+      .filter((framework) => true)
       .map((framework) => this.createFrameworkCard(framework))
       .join("");
 
@@ -65,7 +64,9 @@ class FrameworkList {
                   isSelected ? "framework-card--active" : ""
                 }" 
                      data-framework-id="${framework.id}">
-                    <div class="framework-card__badge" style="display: ${framework.status ? 'block' : 'none'}">
+                    <div class="framework-card__badge" style="display: ${
+                      framework.status ? "block" : "none"
+                    }">
                         <span class="badge badge--${statusClass}">
                             ${this.renderStatusIcon(
                               statusIcon

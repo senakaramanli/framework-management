@@ -2,11 +2,10 @@
  * API Module
  * Handles all API calls with mock data fallback
  */
-
 class API {
     constructor() {
         this.baseUrl = '/api';
-        this.mockDelay = 200; // Simulate network delay
+        this.mockDelay = 200;
     }
     
     async getJSON(url, params = {}) {
@@ -42,9 +41,7 @@ class API {
         return this.getControls(frameworkId, page, pageSize);
     }
     
-    // Mock data fallback
     async getMockData(url, params = {}) {
-        // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, this.mockDelay));
         
         if (url.includes('/frameworks') && !url.includes('/controls')) {
@@ -58,7 +55,6 @@ class API {
     }
     
     getMockFrameworks() {
-        console.log('Loading mock frameworks...');
         return [
             {
                 id: 1,
@@ -255,10 +251,8 @@ class API {
     }
 }
 
-// Create global API instance
 const api = new API();
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = API;
 }

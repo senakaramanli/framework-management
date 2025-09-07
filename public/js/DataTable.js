@@ -305,47 +305,8 @@ class DataTable {
         this.render();
     }
     
-    handleAction(action, controlId) {
-        console.log(`Action: ${action} on control: ${controlId}`);
-        
-        switch (action) {
-            case 'edit':
-                this.editControl(controlId);
-                break;
-            case 'approve':
-                this.approveControl(controlId);
-                break;
-            case 'delete':
-                this.deleteControl(controlId);
-                break;
-        }
-    }
-    
-    editControl(controlId) {
-        // Mock edit functionality
-        alert(`Edit control: ${controlId}`);
-    }
-    
-    approveControl(controlId) {
-        // Mock approve functionality
-        alert(`Approve control: ${controlId}`);
-    }
-    
-    deleteControl(controlId) {
-        // Mock delete functionality
-        if (confirm(`Are you sure you want to delete control: ${controlId}?`)) {
-            alert(`Delete control: ${controlId}`);
-        }
-    }
-    
-    refresh() {
-        if (this.currentFrameworkId) {
-            this.initTable(this.currentFrameworkId, this.currentPage, this.pageSize);
-        }
-    }
     
     destroy() {
-        // Remove event listeners and clean up
         this.hideLoading();
         this.showPlaceholder();
         this.data = [];
